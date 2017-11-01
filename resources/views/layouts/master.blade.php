@@ -48,24 +48,23 @@
           <div class="container">
             <nav class="navbar navbar-default navbar-static-top tm_navbar" role="navigation">
                 <ul class="nav sf-menu">
-                  <li class="active"><a href="{{ route('viewindex') }}">Home</a></li>
-                  <li><a href="{{ route('viewmenus') }}">Menu</a></li>
-                  <li><a href="{{ route('getrestaurant') }}">Restaurant</a></li>
+				  @if((Session::has('token')))
+					  <li><a href="{{ route('viewmenus') }}">Menu</a></li>
+					  <li><a href="{{ route('getrestaurant') }}">Restaurant</a></li>
+					  <li><a href="{{ route('viewcart') }}">Payments</a></li>
+				  @endif
 				  <li><a href="{{ route('login') }}">Account</a>
 				      <ul>
-						  <li><img src="{{ asset('img/arrowup.png')}}" alt=""><a href="{{ route('login') }}">login</a></li>
-						  <li><a href="{{ route('registration') }}">sign up</a></li>
-						  <!--
-						  <li><a class="last" href="#">my account</a>
-                                 <ul>
-                           <li><a href="#">login</a></li>
-                           <li><a class="last" href="{{ route('registration') }}">sign up</a></li>                       
-                                </ul>
-						   -->
+						  @if((Session::has('token')))
+							  <li><a href="{{ route('dologout') }}">logout</a></li>
+						  @else
+							  <li><img src="{{ asset('img/arrowup.png')}}" alt=""><a href="{{ route('login') }}">login</a></li>
+							  <li><a href="{{ route('registration') }}">sign up</a></li>
+						  @endif
+					
                       </li>
                     </ul>
 				  </li>
-				  <li><a href="{{ route('viewcart') }}">Payments</a></li>
                 </ul>
             </nav>
           </div>

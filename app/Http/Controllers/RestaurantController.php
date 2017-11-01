@@ -53,7 +53,14 @@ class RestaurantController extends Controller
 	//Return
 	return $FoodItem;
   }
-  public function EditMenu(Request $request)
+  public function viewsinglerestaurant($id)
+  {
+	//Single Menus
+	$Outlet =Api::getRequest("Outlets/" . $id);
+	$OutletItem = json_decode( $Outlet, true );
+	return $OutletItem;
+  }
+  public function editmenu(Request $request)
   {
 	//Save edits
 	$outId=$request->outletid;
@@ -66,7 +73,7 @@ class RestaurantController extends Controller
 	//get foreign keys
 	$Food =Api::getRequest("MerchantProducts/" . $itemid);
 	$FoodArray=json_decode($Food, true);
-
+	//body
 	$myBody['merchant_product_id'] = $itemid;
 	$myBody['merchant_id'] = $FoodArray['merchant_id'];
 	$myBody['food_type'] = $FoodArray['food_type'];
@@ -77,5 +84,43 @@ class RestaurantController extends Controller
 	$result =Api::putRequest("MerchantProducts/" . $itemid,$myBody);
 
     return redirect()->route('menus', ['id'=>$outId]);
+  }
+  public function outletedit(Request $request)
+  {
+	//Save edits
+	$itemid=$request->itemid;
+	$featured_photo=$request->itemfeatured_photo;
+	$name=$request->itemnamee;
+	$streetname=$request->itemstreetname;
+	$unit_no=$request->itemunit_no;
+	$streetname=$request->itemstreetname;
+	$postal_code=$request->itempostal_code;
+	$contact_no=$request->itemcontact_no;
+
+	$merchant_id=$request->itemmerchant_id;
+
+	//get foreign keys
+	$Outlet =Api::getRequest("Outlets?outlet_id=" . $itemid);
+	$OutletArray=json_decode($Outlet, true);
+
+	$myBody['outlet_id'] = $itemid;
+	$myBody['featured_photo'] = $featured_photo;
+	$myBody['name'] = $name;
+	$myBody['streetname'] = $streetname;
+	$myBody['unit_no'] = $unit_no;
+	$myBody['postal_code'] = $postal_code;
+	$myBody['contact_no'] = $contact_no;
+	$url ="https://maps.googleapis.com/maps/api/geocode/xml?address=" . $postal_code . "&sensor=false";
+	$result = simplexml_load_file($url);;
+	$myBody['lat'] = $result->result->geometry->location->lat;
+	$myBody['lon'] = $result->result->geometry->location->lng;
+
+	$myBody['opening_time'] = $OutletArray['opening_time'];
+	$myBody['closing_time'] = $OutletArray['closing_time'];
+	$myBody['last_review_time'] = $OutletArray['last_review_time'];
+	$myBody['avg_ratings'] = $OutletArray['avg_ratings'];
+	$myBody['merchant_id'] = $OutletArray['merchant_id'];
+	$result =Api::putRequest("Outlets/" . $itemid,$myBody);
+    return redirect()->route('menus', ['id'=>$itemid]);
   }
 }

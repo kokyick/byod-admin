@@ -11,8 +11,8 @@
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\app",
-    "\\resources\\views\\layouts"
+    "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\app\\menu.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\RestaurantController.php",
   "PreviewInSolutionExplorer": false
 }

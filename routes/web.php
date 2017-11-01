@@ -31,12 +31,14 @@ Route::get('/login', 'HomeController@viewlogin')->name('login');
 Route::get('/menus', 'RestaurantController@viewmenu')->name('viewmenus');
 Route::get('/menus/{id}', 'RestaurantController@viewmenus')->name('menus');
 Route::get('/singlemenus/{id}','RestaurantController@viewfooditem')->name('singlemenus');
+Route::get('/viewsinglerestaurant/{id}', 'RestaurantController@viewsinglerestaurant')->name('viewsinglerestaurant');
 
 Route::get('/getrestaurant', 'RestaurantController@getrestaurant')->name('getrestaurant');
+Route::post('/dooutletedit/', 'RestaurantController@outletedit')->name('dooutletedit');
 
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
-Route::post('/domenuedit/', 'RestaurantController@EditMenu')->name('domenuedit');
+Route::post('/domenuedit/', 'RestaurantController@editmenu')->name('domenuedit');
 
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
