@@ -429,7 +429,6 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 $('.myBtn').click(function(){
 	var food = $(this).attr('id');
-	alert($(this).attr('id'));
 	$.get(food,function(data){
 		var header="<h3>" + data.name + "</h3>";
 		var body="$ "+data.price+"<br/> ";
