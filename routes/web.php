@@ -40,6 +40,7 @@ Route::post('/dooutletedit/', 'RestaurantController@outletedit')->name('dooutlet
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
 Route::post('/domenuedit/', 'RestaurantController@editmenu')->name('domenuedit');
 Route::post('/domenuadd/', 'RestaurantController@addmenu')->name('domenuadd');
+Route::post('/dodishadd/', 'RestaurantController@adddish')->name('dodishadd');
 
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');

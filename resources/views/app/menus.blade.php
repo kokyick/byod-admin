@@ -365,7 +365,7 @@
 <!-- Add Modal -->
 <div id="amyModal" class="amodal">
 
-  <!-- Modal content -->
+  <!-- Add Modal content -->
   <div class="amodal-content">
     <div class="amodal-header">
       <span class="aclose">&times;</span>

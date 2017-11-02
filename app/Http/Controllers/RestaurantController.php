@@ -27,8 +27,11 @@ class RestaurantController extends Controller
 	//Food types
 	$FTList =Api::getRequest("FoodTypes");
 	$FoodTypeList = json_decode( $FTList, true );
+	//Dish List
+	$PList =Api::getRequest("MerchantProducts");
+	$DishList = json_decode( $PList, true );
 	//Return
-    return view("app.menus", compact('MenuList','FoodTypeList'));
+    return view("app.menus", compact('MenuList','FoodTypeList','DishList'));
   }
   public function viewmenus($id)
   {
@@ -41,8 +44,11 @@ class RestaurantController extends Controller
 	//Outlet data
 	$OutList =Api::getRequest("Outlets/" . $id);
 	$OutData = json_decode( $OutList, true );
+	//Dish List
+	$PList =Api::getRequest("MerchantProducts");
+	$DishList = json_decode( $PList, true );
 	//Return
-    return view("app.menu", compact('MenuList','FoodTypeList','OutData'));
+    return view("app.menu", compact('MenuList','FoodTypeList','OutData','DishList'));
   }
   public function viewfooditem($id)
   {
@@ -83,6 +89,19 @@ class RestaurantController extends Controller
 	$myBody['product_image'] = $itemproduct_image;
 	$result =Api::putRequest("MerchantProducts/" . $itemid,$myBody);
 
+    return redirect()->route('menus', ['id'=>$outId]);
+  }
+  public function adddish(Request $request)
+  {
+	//Save edits
+	$outId=$request->outlet_id;
+	$itemid=$request->aitemfood_type;
+
+	//body
+	$myBody['outlet_id'] = $outId;
+	$myBody['merchant_product_id'] = $itemid;
+	//dd($myBody);
+	$result =Api::postRequest("Products/",$myBody);
     return redirect()->route('menus', ['id'=>$outId]);
   }
   public function addmenu(Request $request)
