@@ -110,13 +110,15 @@
     <div class="row_8">
         <div class="container">
 		<?php
-			$url ="https://maps.googleapis.com/maps/api/geocode/xml?address={{$OutData['streetname']}}&sensor=false";
+			$postal=$OutData['postal_code'];
+			$streetname=$OutData['streetname'];
+			$url ="https://maps.googleapis.com/maps/api/geocode/xml?address={{$postal}}&sensor=false";
 			$result = simplexml_load_file($url);;
 			//print_r($result->result->geometry->location);
 		?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 gmap">
-                      <div class="map"><iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q={{$OutData['streetname']}}&amp;aq=0&amp;sll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;sspn={{$result->result->geometry->location->lat}}{{$result->result->geometry->location->lng}}&amp;ie=UTF8&amp;hq=&amp;hnear={{$OutData['streetname']}}&amp;ll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;spn=0.01628,0.025663&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe></div>
+                      <div class="map"><iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q={{$streetname}}&amp;aq=0&amp;sll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;sspn={{$result->result->geometry->location->lat}}{{$result->result->geometry->location->lng}}&amp;ie=UTF8&amp;hq=&amp;hnear={{$postal}}&amp;ll={{$result->result->geometry->location->lat}},{{$result->result->geometry->location->lng}}&amp;spn=0.01628,0.025663&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe></div>
                     </div>  
                  </div> 
                  <div class="row">

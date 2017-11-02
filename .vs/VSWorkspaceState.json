@@ -7,10 +7,8 @@
     "\\app\\Library",
     "\\public",
     "\\public\\css",
-    "\\public\\css\\css",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\app",
     "\\routes"
   ],
   "SelectedNode": "\\app\\Http\\Controllers\\RestaurantController.php",

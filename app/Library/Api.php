@@ -10,14 +10,20 @@ class Api
 
 	public static function postLogin($username, $password){
 		$client = new \GuzzleHttp\Client();
-
-		$result=$client->request('POST', self::server . 'Token', [
-			'form_params' => [
-				'grant_type' => "password",
-				'username' => $username,
-				'password' => $password
-			]
-		]);
+		try {
+			$result=$client->request('POST', self::server . 'Token', [
+				'form_params' => [
+					'grant_type' => "password",
+					'username' => $username,
+					'password' => $password
+				]
+			]);
+		}catch (RequestException $e) {
+			$result= Psr7\str($e->getRequest());
+			if ($e->hasResponse()) {
+				$result= Psr7\str($e->getResponse());
+		}
+}
 		return $result;
 	}
 
@@ -27,11 +33,17 @@ class Api
 		$client = new \GuzzleHttp\Client();
 
 		$url = self::server . "api/" . $link;
-
-		$request = $client->request('GET', $url);
-
-		$response = $request->getBody()->getContents();
-
+		try {
+			$request = $client->request('GET', $url);
+			$response = $request->getBody()->getContents();
+		}
+		catch (RequestException $e) {
+			$response= Psr7\str($e->getRequest());
+			if ($e->hasResponse()) {
+				$response = Psr7\str($e->getResponse());
+			}
+		}
+		
 		return ($response);
 	}
 	public static function postRequest($link, $myBody )
@@ -42,11 +54,17 @@ class Api
 		$url = self::server . "api/" . $link;
 
 		//$myBody['name'] = "Demo";
-
+		try {
 		$request = $client->post($url,  ['form_params'=>$myBody]);
 
 		$response = $request->getBody()->getContents();
-
+		}
+		catch (RequestException $e) {
+			$response= Psr7\str($e->getRequest());
+			if ($e->hasResponse()) {
+				$response = Psr7\str($e->getResponse());
+			}
+		}
 
 	}
 	public static function putRequest($link, $myBody)
@@ -57,10 +75,17 @@ class Api
 		$url = self::server . "api/" . $link;
 
 		//$myBody['name'] = "Demo";
-
+		try{
 		$request = $client->put($url,  ['form_params'=>$myBody]);
 
 		$response = $request->getBody()->getContents();
+		}
+		catch (RequestException $e) {
+			$response= Psr7\str($e->getRequest());
+			if ($e->hasResponse()) {
+				$response = Psr7\str($e->getResponse());
+			}
+		}
 
 
 	}
@@ -70,11 +95,17 @@ class Api
 		$client = new \GuzzleHttp\Client();
 		
 		$url = self::server . "api/" . $link;
+		try{
+			$request = $client->delete($url);
 
-		$request = $client->delete($url);
-
-		$response = $request->getBody()->getContents();
-
+			$response = $request->getBody()->getContents();
+		}
+		catch (RequestException $e) {
+			$response= Psr7\str($e->getRequest());
+			if ($e->hasResponse()) {
+				$response = Psr7\str($e->getResponse());
+			}
+		}
 
 		dd($response);
 

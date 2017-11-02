@@ -47,7 +47,7 @@ class RestaurantController extends Controller
   public function viewfooditem($id)
   {
 	//Single Menus
-	$Food =Api::getRequest("Products?product_id=" . $id);
+	$Food =Api::getRequest("GetSingleProduct?product_id=" . $id);
 	$FoodItem = json_decode( $Food, true );
 	//dd($FoodItem);
 	//Return
@@ -83,6 +83,27 @@ class RestaurantController extends Controller
 	$myBody['product_image'] = $itemproduct_image;
 	$result =Api::putRequest("MerchantProducts/" . $itemid,$myBody);
 
+    return redirect()->route('menus', ['id'=>$outId]);
+  }
+  public function addmenu(Request $request)
+  {
+	//Save edits
+	$outId=$request->outlet_id;
+	$itemname=$request->aitemname;
+	$itemprice=$request->aitemprice;
+	$itemproduct_image=$request->aitemproduct_image;
+	$itemfood_type=$request->aitemfood_type;
+	$avg_ratings=0;
+
+	//body
+	$myBody['merchant_id'] = 3;
+	$myBody['food_type'] = $itemfood_type;
+	$myBody['avg_ratings'] = $avg_ratings;
+	$myBody['name'] = $itemname;
+	$myBody['price'] = $itemprice;
+	$myBody['product_image'] = $itemproduct_image;
+	//dd($myBody);
+	$result =Api::postRequest("MerchantProducts/",$myBody);
     return redirect()->route('menus', ['id'=>$outId]);
   }
   public function outletedit(Request $request)
