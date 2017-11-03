@@ -9,10 +9,10 @@
         <div class="container">
                 <div class="row">
             		<div class="col-lg-8 col-md-8 col-sm-8">
-                        <h2 class="pad_bot2">Your Orders</h2>
+                        <h2 class="pad_bot2">Transaction History</h2>
                         <div class="row links">
                 		  <div class="col-lg-6 col-md-6 col-sm-6" style="width:100%;">
-							
+							<h3>Under Maintenance</h3>
 							@if(Session::get('cart'))
 								@foreach (Session::get('cart') as $food)
 									<div class="card myBtn">
@@ -33,7 +33,7 @@
 							<div class="card-content">
 								<figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
 								<hr/>
-								<h2 style="padding:0;">Sub Total</h2>
+								<h2 style="padding:0;">Under Maintenance</h2>
 								<hr/>
 								@if(Session::get('cart'))
 								<ul class="list2">

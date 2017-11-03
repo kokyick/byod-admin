@@ -136,6 +136,8 @@ class RestaurantController extends Controller
 	$streetname=$request->itemstreetname;
 	$postal_code=$request->itempostal_code;
 	$contact_no=$request->itemcontact_no;
+	$gst=$request->itemgst;
+	$servicecharge=$request->itemsvscharge;
 
 	$merchant_id=$request->itemmerchant_id;
 
@@ -150,6 +152,8 @@ class RestaurantController extends Controller
 	$myBody['unit_no'] = $unit_no;
 	$myBody['postal_code'] = $postal_code;
 	$myBody['contact_no'] = $contact_no;
+	$myBody['gst'] = $gst;
+	$myBody['servicecharge'] = $servicecharge;
 	$url ="https://maps.googleapis.com/maps/api/geocode/xml?address=" . $postal_code . "&sensor=false";
 	$result = simplexml_load_file($url);;
 	$myBody['lat'] = $result->result->geometry->location->lat;

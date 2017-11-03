@@ -123,6 +123,8 @@
                  </div> 
                  <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 address">
+						<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{$OutData['featured_photo']}}" alt=""></figure></a>
+                        <h2>{{ $OutData['name'] }}</h2>
                         <h2>Postal Address <i class="fa fa-pencil editRestaurant" id="{{ route('viewsinglerestaurant', $OutData['outlet_id']) }}" aria-hidden="true"></i></h2>
                         <address>
                             <div class="info">
@@ -551,10 +553,16 @@ window.onclick = function(event) {
 								<h3>Image</h3>
 								<input id="itemfeatured_photo" type="text" name="itemfeatured_photo" class="form-control input-number">
 								<hr/>
-								<h3>Contact Number</h3>
+								<h3>Contact number</h3>
 								<input id="itemcontact_no" type="text" name="itemcontact_no" class="form-control input-number">
 								<input style="display: none;" id="itemmerchant_id" type="text" name="itemmerchant_id" class="form-control input-number">
 								<input style="display: none;" id="avg_ratings" type="text" name="avg_ratings" class="form-control input-number">
+								<hr/>
+								<h3>Extra charges</h3>
+								<h3>GST (%)</h3>
+								<input id="itemgst" type="text" name="itemgst" class="form-control input-number">
+								<h3>Service Charge (%)</h3>
+								<input id="itemsvscharge" type="text" name="itemsvscharge" class="form-control input-number">
 								<hr/>
 								<p></p>
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
@@ -648,6 +656,8 @@ $('.editRestaurant').click(function(){
 		$('#itemcontact_no').attr('value', data.contact_no);
 		$('#food_type').attr('value', data.food_type);
 		$('#avg_ratings').attr('value', data.avg_ratings);
+		$('#itemgst').attr('value', data.gst);
+		$('#itemsvscharge').attr('value', data.servicecharge);
 	});
 	
 
